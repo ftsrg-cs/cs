@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  nfs-server:
+    image: itsthenetwork/nfs-server-alpine
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - nfs_data:/nfsshare
+    environment:
+      - SHARED_DIRECTORY=/nfsshare
+    network_mode: host
+    #ports:
+    #  - "2094:2094"
+      
+volumes:
+  nfs_data:
