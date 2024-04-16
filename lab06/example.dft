@@ -1,0 +1,10 @@
+toplevel service;
+service or web_cluster database_cluster storage; // Service Failure
+web_cluster and web_1 web_2;                     // Web Server Cluster Failure
+web_1 lambda=0.05;                               // Web Server 1 Failure
+web_2 lambda=0.05;                               // Web Server 2 Failure
+database_cluster wsp database_1 database_2;      // Database Cluster Failure
+database_1 lambda=0.01 dorm=0.8;                 // Database 1 Failure
+database_2 lambda=0.01 dorm=0.8;                 // Database 2 Failure
+storage lambda=0.03;                             // Storage Subsystem Failure
+
