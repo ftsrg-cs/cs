@@ -1,0 +1,133 @@
+Courses: CS1001, CS1002, CS1003, CS1004, CS1005, CS1006, CS1007, CS1008, CS1009, CS2001, CS2002, CS2003, CS2004, CS2005, CS2006, CS2007, CS2008
+
+Prof. Smith may deliver CS1001.
+Prof. Kovacs may deliver CS1001.
+Prof. Schmidt may deliver CS1001.
+
+Prof. Smith may deliver CS1002.
+Prof. Kovacs may deliver CS1002.
+
+Prof. Schmidt may deliver CS1003.
+
+Prof. Kovacs may deliver CS1004.
+Prof. Schmidt may deliver CS1004.
+
+Prof. Smith may deliver CS1005.
+Prof. Kovacs may deliver CS1005.
+Prof. Schmidt may deliver CS1005.
+
+Prof. Smith may deliver CS1006.
+Prof. Schmidt may deliver CS1006.
+
+Prof. Kovacs may deliver CS1007.
+
+Prof. Schmidt may deliver CS1008.
+
+Prof. Smith may deliver CS1009.
+Prof. Kovacs may deliver CS1009.
+
+Prof. Smith may deliver CS2001.
+Prof. Schmidt may deliver CS2001.
+
+Prof. Kovacs may deliver CS2002.
+Prof. Smith may deliver CS2002.
+
+Prof. Schmidt may deliver CS2003.
+Prof. Kovacs may deliver CS2003.
+Prof. Smith may deliver CS2003.
+
+Prof. Smith may deliver CS2004.
+Prof. Kovacs may deliver CS2004.
+
+Prof. Schmidt may deliver CS2005.
+Prof. Smith may deliver CS2005.
+
+Prof. Schmidt may deliver CS2006.
+
+Prof. Smith may deliver CS2007.
+Prof. Kovacs may deliver CS2007.
+
+Prof. Schmidt may deliver CS2008.
+Prof. Smith may deliver CS2008.
+
+Students: Alice, Brian, Chloe, Daniel, Emma, Frank, Grace, Henry, Isla, Jack, Karen, Liam, Mia, Noah, Olivia, Peter, Quinn, Rachel, Sam, Tina, Umar, Victor, Wendy, Xavier, Yara, Zoe
+
+Alice enrolled to CS1001.
+Alice enrolled to CS2003.
+
+Brian enrolled to CS1002.
+Brian enrolled to CS1007.
+Brian enrolled to CS2001.
+
+Chloe enrolled to CS1003.
+Chloe enrolled to CS2004.
+
+Daniel enrolled to CS1004.
+Daniel enrolled to CS2002.
+
+Emma enrolled to CS1005.
+Emma enrolled to CS2005.
+
+Frank enrolled to CS1006.
+Frank enrolled to CS2006.
+
+Grace enrolled to CS2007.
+
+Henry enrolled to CS1008.
+Henry enrolled to CS2004.
+Henry enrolled to CS2008.
+
+Isla enrolled to CS1009.
+
+Jack enrolled to CS1001.
+Jack enrolled to CS2003.
+
+Karen enrolled to CS1002.
+Karen enrolled to CS2004.
+
+Liam enrolled to CS1003.
+Liam enrolled to CS1009.
+Liam enrolled to CS2005.
+
+Mia enrolled to CS1004.
+Mia enrolled to CS2006.
+
+Noah enrolled to CS1005.
+Noah enrolled to CS2007.
+
+Olivia enrolled to CS1006.
+Olivia enrolled to CS2008.
+
+Peter enrolled to CS1007.
+
+Quinn enrolled to CS1008.
+Quinn enrolled to CS2001.
+
+Rachel enrolled to CS1009.
+Rachel enrolled to CS2002.
+
+Sam enrolled to CS1001.
+Sam enrolled to CS2003.
+
+Tina enrolled to CS1002.
+Tina enrolled to CS2004.
+Tina enrolled to CS2005.
+
+Umar enrolled to CS1003.
+Umar enrolled to CS2005.
+
+Victor enrolled to CS1004.
+Victor enrolled to CS2006.
+
+Wendy enrolled to CS1005.
+Wendy enrolled to CS2007.
+
+Xavier enrolled to CS1006.
+Xavier enrolled to CS2008.
+
+Yara enrolled to CS1007.
+
+Zoe enrolled to CS1008.
+Zoe enrolled to CS2001.
+
+Rooms: Q1, Q2
