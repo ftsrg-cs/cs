@@ -110,7 +110,7 @@ The Refinery webclient uses solid/filled style for visualizing `true` values, da
 
 The first task is to model our problem and test it on a small hand-crafted example.
 
-### a. Metamodel (1p)
+### a. Metamodel
 
 The first warm-up task is to create the metamodel of our domain. We want to generate the schedule for courses where each course has a single professor. A professor can give several courses. Students can enroll to courses. Each course should be assigned a (single) room and a (single) time slot. The time slot is characterized by the day of week and the time period. We could model time periods with exact start and end times using integer attributes in Refinery, but that would unnecessarily complicate our case: so let us assume that the courses can only be scheduled to fixed two-hour periods starting every even hour from 8 to 16.
 
@@ -118,18 +118,18 @@ Note: Refinery has a built-in *enum* class for enumerations, but it is more effi
 
 **Provide the metamodel code and a screenshot of the Refinery partial model view.**
 
-### b. Requirement formalization (1p)
+### b. Requirement formalization
 
 Having a metamodel of our problem, we can formalize the requirements of a well-formed schedule. Namely, we want to satisfy the following constraints:
 
 - Two courses that are scheduled to the same time slot cannot have the same room assigned.
 - A professor cannot have two courses at the same time slot.
 
-As usual when we require some property to *always hold*, we formalize a predicate for the negation of this constraint: such a predicate characterizes the inconsistent models where the required property is violated. Mark the predicate characterizing violations as `error` predicates. Predicates can refer to other predicates in the predicate body, therefore avoid duplication of the same logic in the code (e.g., the intersection of time slots for two courses appear in both requirements).
+As usual when we require some property to *always hold*, we formalize a predicate for the negation of this constraint: such a predicate characterizes the inconsistent models where the required property is violated. Mark the predicate characterizing violations as `error` predicates. Predicates can refer to other predicates in the predicate body, therefore avoid duplication of the same logic in the code (e.g., the intersection of time slots for two courses appear in both requirements). When matching courses scheduled for the same time slot, ensure that you check that they are not scheduled for the same day and period (that is, you should not simply check if the time slot objects are equal or not as they may point to the same day and period).
 
 **Provide the code for your graph predicates formalizing the above requirements.**
 
-### c. Simple instance model (1p)
+### c. Simple instance model
 
 The next task is to create a simple hand-crafted instance model. Let us have two days (Monday and Tuesday) and two periods (8-10 and 10-12), two professors, three courses and two rooms. We can ignore students for now. Constrain days and periods such that no further instances of these classes can be generated during model generation: you can either achieve this by setting the scopes for these classes or by asserting that no new instances of these classes exist (the assertion `!exists(Day::new)` may be used).
 
@@ -151,9 +151,9 @@ If the model generation reaches an inconsistent partial model after a step (wher
 
 Thinking about the design space exploration, we can understand the timeouts that we faced in Task 1. Since we have not constrained the scope of several types (only days and time periods were limited), we always have the option to create new objects belonging to these types. Therefore, the model generation procedure can endlessly generate new objects (e.g., students or time slots). So the design space is infinite: hence the timeout. Naturally, we can be lucky such that the model generation finds a branch of the design space that reaches a concrete model in relatively few steps. However, we want to make sure that we always obtain a solution to our problem in finite time. Thus, we either have to guarantee that the design space is finite or choose a design space exploration strategy that can efficiently find solutions.
 
-### a. Quick fix (1p)
+### a. Quick fix
 
-As a quick fix, limit the number of nodes for each type using *scope* constraints to ensure that the design space for model generation is finite. This way, the model generation should quickly find a solution for your model.
+As a quick fix, limit the number of nodes for each type using *scope* constraints to ensure that the design space for model generation is finite. This way, the model generation should quickly find a solution for your model. Pro tip: you can use `+=` in the scope constraints to limit the number of objects created during the model generation: this way, you do not need to care about the number of objects created by your assertions (see more details in Task 0).
 
 **Include your scope constraints in the submitted report as well as a screenshot of a generated concrete model.**
 
@@ -161,7 +161,7 @@ Ensure that your graph predicates are correctly formalized: modify your assertio
 
 **Include a screenshot of the unsatisfiable result.**
 
-### b. Advanced model generation strategy (2p)
+### b. Advanced model generation strategy
 
 While limiting the number of nodes using scope constraints is an easy and perfect solution in many cases, it may be unrealistic in some scenarios if our problem indeed has an open-world semantics. Even if there is an upper bound for the number of nodes, maybe we cannot or do not want to specify it manually in our model.
 
@@ -208,7 +208,7 @@ Using propagation rules have two main advantages:
 
 We will see both of these advantages with an example in our case study. However, let us start with some data preparation so that we can test with larger data whether propagation indeed improves the model generation performance.
 
-### a. Data preparation (2p)
+### a. Data preparation
 
 You can download a prepared dataset with more courses, professors, rooms, and students from [here](). The data is given as a "natural language" input, but you can easily use some regex queries to convert them to Refinery assertions according to your metamodel. We suggest to use your favourite LLM to generate a script (shell or python) that converts this input to valid Refinery assertions.
 
@@ -218,7 +218,7 @@ When a professor-course pair is not explicitly mentioned in the input, we assume
 
 Even with the guided search strategy implemented in Task 2b, model generation should timeout (or at least take quite some seconds to complete).
 
-### b. Implement propagation (2p)
+### b. Implement propagation
 
 Consider the second requirement from Task 1b: *a professor cannot have two courses at the same time slot*. You have already formulated this as an error predicate to exclude models where a professor has several courses scheduled for the same time slot. Now, you should also formulate a propagation rule for this requirement in the following sense: *if a professor already has a course scheduled for certain time slot, then another course delivered by the same professor should not be scheduled for the same time slot*. This is indeed a *proactive* description of our requirement that can be useful during model generation.
 
@@ -260,5 +260,7 @@ Demonstrate that your solution works well with two minimal hand-crafted examples
 
 <details>
     <summary>Hint</summary>
-    Divide the decision rule written for Task 2b to separately handle the creation of a new time slot for Friday and for other days of the week. The rule creating time slots on Friday should ensure in its precondition that there is no option for the current course to be scheduled on another day without a room or professor conflict. You may need to create helper queries and you may want to use the `must` modality modifier in these helper queries: if you want to use the `must` modifier in a predicate, you need to add the `shadow` keyword before the `pred` keyword.
+    <br>
+    <p>Divide the decision rule written for Task 2b to separately handle the creation of a new time slot for Friday and for other days of the week. The rule creating time slots on Friday should ensure in its precondition that there is no option for the current course to be scheduled on another day without a room or professor conflict. Basically, the precondition of this latter rule creating time slots on Friday should not be satisfied in the following two cases: 1) there is a time slot on an other day when no courses have been scheduled at all, and 2) all other time slots already have courses but there is a time slot among these when no conflicting course is scheduled with the currently handled course. In these two cases, we should not create a time slot for Friday, as the current course can be put on an other day.</p>
+    <p>You may need to create helper queries and you may want to use the `must` modality modifier in these helper queries: if you want to use the `must` modifier in a predicate, you need to add the `shadow` keyword before the `pred` keyword.</p>
 </details>
